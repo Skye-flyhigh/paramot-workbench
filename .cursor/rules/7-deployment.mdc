@@ -1,29 +1,188 @@
 ---
-description: Deployment strategy
-globs: 
+description:
+globs:
 alwaysApply: false
 ---
+# Deployment Strategy
 
-# Deployment Targets
+## Core Principles
+- Safety-first: Every deployment must maintain data integrity
+- Offline-first: App must function without internet
+- Data persistence: Critical workshop data must be protected
+- Version control: Manufacturer data must be traceable
+- Audit trail: All safety validations must be preserved
 
-macOS (M1/M2+)
+## Target Platforms
 
-Windows 10+
+### macOS (M1/M2+)
+- Minimum: macOS 11.0 (Big Sur)
+- Target: Latest macOS
+- Architecture: Universal (arm64 + x64)
+- Requirements:
+  - Full disk access for workshop data
+  - PDF generation capabilities
+  - Local SQLite database access
+  - File system permissions for images
+  - Backup directory access
 
-Installer
+### Windows 10+
+- Minimum: Windows 10 (1909)
+- Target: Latest Windows 11
+- Architecture: x64
+- Requirements:
+  - Local database access
+  - PDF generation
+  - File system permissions
+  - Workshop data directory access
 
-Use electron-builder or electron-forge
+## Build Process
 
-Output: .dmg (mac), .exe (win)
+### Prerequisites
+- Node.js 18+ (LTS)
+- Rust toolchain (for SQLite optimizations)
+- Platform-specific build tools
+- Code signing certificates (recommended)
 
-Build Steps
+### Build Steps
+1. **Environment Setup**
+   ```bash
+   # Install dependencies
+   npm install
+   # Build Prisma client
+   npx prisma generate
+   # Verify SQLite integrity
+   npm run verify-db
+   ```
 
-Compile Electron frontend
+2. **Safety Checks**
+   - Validate manufacturer data integrity
+   - Verify APPI methodology implementation
+   - Check safety validation rules
+   - Test offline functionality
+   - Verify data persistence
+   - Validate PDF generation
+   - Test measurement calculations
 
-Bundle SQLite with app
+3. **Build Process**
+   ```bash
+   # Development build
+   npm run build:dev
+   # Production build
+   npm run build:prod
+   # Package for distribution
+   npm run package
+   ```
 
-Ensure write access to ~/Documents/Thermix/
+4. **Distribution Package**
+   - macOS: `.dmg` with notarization
+   - Windows: `.exe` with installer
+   - Include:
+     - SQLite database template
+     - Manufacturer data version
+     - Safety validation rules
+     - APPI methodology data
+     - PDF templates
+     - Default workshop config
 
-Code sign (optional)
+## Installation Requirements
 
-Test offline mode before release
+### Data Directory Structure
+```
+~/Documents/paramot-workbench/
+├── workshop/
+│   ├── clients/
+│   ├── inspections/
+│   ├── reports/
+│   └── images/
+├── manufacturer/
+│   ├── data/
+│   ├── manuals/
+│   └── updates/
+└── backup/
+    ├── daily/
+    └── critical/
+```
+
+### Permissions
+- Full disk access (macOS)
+- Local database access
+- File system write access
+- PDF generation
+- Image storage
+- Backup creation
+
+### First Run
+- Create workshop directory structure
+- Initialize SQLite database
+- Verify manufacturer data
+- Test safety validation
+- Validate offline mode
+- Check PDF generation
+- Verify measurement tools
+
+## Safety Considerations
+
+### Data Integrity
+- Automatic backup on critical operations
+- Checksum verification for manufacturer data
+- Transaction support for all database operations
+- Version control for safety-critical data
+- Audit trail for all validations
+
+### Offline Operation
+- Verify all features work offline
+- Test data persistence
+- Validate PDF generation
+- Check measurement tools
+- Verify safety validation
+- Test manufacturer data access
+
+### Update Strategy
+- Version control for manufacturer data
+- Safety validation rule updates
+- APPI methodology updates
+- PDF template updates
+- Workshop configuration updates
+
+## Distribution
+
+### macOS
+- `.dmg` package with notarization
+- Code signing required
+- Gatekeeper compatibility
+- Sandbox considerations
+- Data directory permissions
+
+### Windows
+- `.exe` installer
+- Code signing recommended
+- UAC compatibility
+- Data directory setup
+- Service installation
+
+## Post-Deployment
+
+### Verification
+- Offline functionality
+- Data persistence
+- Safety validation
+- PDF generation
+- Measurement accuracy
+- Manufacturer data access
+- Workshop operations
+
+### Monitoring
+- Error logging
+- Safety validation tracking
+- Data integrity checks
+- Workshop operations
+- Technician feedback
+- Update requirements
+
+## Rollback Plan
+- Preserve workshop data
+- Maintain manufacturer data
+- Keep safety validations
+- Protect PDF reports
+- Save measurement history
+- Backup configurations

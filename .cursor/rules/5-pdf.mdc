@@ -1,21 +1,166 @@
 ---
-description: Glider servicing report PDF format
+description: 
 globs: 
 alwaysApply: false
 ---
-
 # PDF Output Rules
 
-Library: jsPDF or pdf-lib
-Trigger: Manual generation per inspection session
-Inclusions
-Technician details
-Glider metadata
-Trim results and differential comparisons
-Repair log
-Optional: Images, if added by technician
-Layout Rules
-Title + header page (logo optional)
-Summary page (glider + inspection)
-Condition pages per section (lines, fabric, risers)
-Trim page with differential diagrams (later)
+## Core Configuration
+- **Library**: jsPDF or pdf-lib
+- **Trigger**: Manual generation per inspection session
+- **Validation**: Required safety checkpoints before generation
+- **Purpose**: Clear communication to customer about glider condition and care
+
+## Required Inclusions
+
+### Customer Communication
+- Clear explanation of inspection findings
+- Detailed repair documentation
+- Safety recommendations
+- Maintenance advice
+- Care instructions
+- Usage recommendations
+- Critical points summary
+
+### Technical Details
+- Technician details
+- Glider metadata
+- Trim results and differential comparisons
+- Repair log
+- Measurement validation
+- Manufacturer specifications
+- Critical findings
+
+### Safety Information
+- Safety clearance statement
+- Critical point documentation
+- Maintenance recommendations
+- Usage guidelines
+- Care instructions
+- Safety considerations
+- Warning points
+
+## Layout Requirements
+
+### Title Page
+- Title + header (logo optional)
+- Customer information
+- Glider details
+- Inspection date
+- Safety statement
+- Critical findings
+- Version information
+
+### Summary Page
+- Glider information
+- Inspection summary
+- Critical findings
+- Repair summary
+- Safety recommendations
+- Maintenance advice
+- Care instructions
+
+### Technical Pages
+- Condition pages per section (lines, fabric, risers)
+- Trim page with differential diagrams
+- Repair documentation
+- Measurement details
+- Critical findings
+- Safety recommendations
+- Maintenance notes
+
+### Care Instructions
+- General maintenance advice
+- Storage recommendations
+- Usage guidelines
+- Safety considerations
+- Care procedures
+- Warning points
+- Contact information
+
+## Content Requirements
+
+### Inspection Documentation
+- All findings clearly documented
+- Repair details included
+- Measurement results
+- Critical points highlighted
+- Safety recommendations
+- Maintenance advice
+- Care instructions
+
+### Safety Communication
+- Clear safety statements
+- Critical point emphasis
+- Maintenance guidance
+- Usage recommendations
+- Care instructions
+- Warning points
+- Safety considerations
+
+### Customer Guidance
+- Clear explanations
+- Practical advice
+- Maintenance tips
+- Usage guidelines
+- Care procedures
+- Safety recommendations
+- Contact information
+
+## Generation Rules
+
+### Content Validation
+- All findings documented
+- Repair details complete
+- Measurements verified
+- Critical points highlighted
+- Safety recommendations
+- Maintenance advice
+- Care instructions
+
+### Format Requirements
+- Clear organization
+- Easy to read
+- Important points highlighted
+- Critical findings prominent
+- Safety information clear
+- Maintenance advice practical
+- Care instructions detailed
+
+### Customer Focus
+- Clear language
+- Practical advice
+- Actionable recommendations
+- Safety emphasis
+- Maintenance guidance
+- Care instructions
+- Contact information
+
+## Error Handling
+
+### Generation Errors
+- Handle missing data gracefully
+- Validate all required fields
+- Check critical information
+- Verify measurements
+- Confirm repair details
+- Validate safety information
+- Track version state
+
+### Content Errors
+- Flag missing information
+- Highlight critical issues
+- Note measurement problems
+- Indicate safety concerns
+- Show maintenance needs
+- Document care requirements
+- Track error state
+
+### Recovery Procedures
+- Save partial generation
+- Track error state
+- Document missing data
+- Note critical issues
+- Record safety concerns
+- Flag maintenance needs
+- Maintain version history

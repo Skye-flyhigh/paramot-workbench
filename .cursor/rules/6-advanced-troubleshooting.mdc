@@ -1,15 +1,171 @@
 ---
 description: 
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Known Issues to Handle
 
-PDF generator crashes when images are corrupted
+## Critical Safety Issues
 
-Unexpected trim results (flag if lines differ >10mm from ref)
+### Measurement Validation
+- PDF generator crashes when images are corrupted
+- Unexpected trim results (flag if lines differ >10mm from ref)
+- Technician error: missing measurement → show warning before report generation
+- File write permissions on macOS sandboxed environment
+- Manufacturer data version mismatch → prevent inspection start
+- Invalid certification class data → block report generation
+- Missing safety validation checkpoints → prevent session completion
+- Corrupted measurement data → require revalidation
 
-Technician error: missing measurement → show warning before report generation
+### Real-World Measurement Scenarios
+- Line length anomalies in cascade groups
+  - Wrong line mounted in wrong cascade position
+  - Tabs showing inconsistent lengths
+  - Cascade group misalignment
+  - Line material mismatch
+- Riser length inconsistencies
+  - A risers shorter than B/C risers
+  - Trim system affecting measurements
+  - Tandem-specific trim variations
+  - Back riser trimmer position impact
+- Trim system variations
+  - Tandem trim system differences
+  - Back riser trimmer neutral position
+  - Manufacturer-specific trim requirements
+  - Trim system calibration impact
+- Measurement tool issues
+  - Laser measurement errors
+  - Calibration drift
+  - Environmental factors
+  - Operator handling errors
 
-File write permissions on macOS sandboxed environment
+### Manufacturer Data Edge Cases
+- Age-related data inconsistencies
+- Missing or outdated specifications
+- Incomplete trim information
+- Varying measurement protocols
+- Inconsistent cascade data
+- Missing trim system details
+- Outdated material specs
+- Incomplete riser information
+
+## Prevention Strategies
+
+### Measurement Validation
+- Implement pre-session validation
+- Add measurement cross-checking
+- Create safety checkpoint verification
+- Set up automatic data backup
+- Implement session recovery
+- Add validation state tracking
+- Create measurement history verification
+- Set up manufacturer data versioning
+
+### Real-World Scenarios
+- Line cascade verification
+  - Visual cascade group check
+  - Line material verification
+  - Tab length comparison
+  - Cascade position validation
+- Riser system validation
+  - Riser length comparison
+  - Trim system position check
+  - Tandem-specific validation
+  - Back riser trimmer verification
+- Measurement protocol
+  - Laser calibration check
+  - Environmental factor consideration
+  - Operator training validation
+  - Tool condition verification
+
+### Manufacturer Data
+- Version control for manufacturer data
+- Regular data update checks
+- Specification verification
+- Protocol validation
+- Material spec tracking
+- Trim system documentation
+- Cascade group verification
+- Riser system validation
+
+## Error Handling Priority
+
+1. **Critical Safety**
+   - Measurement validation failure
+   - Line cascade misalignment
+   - Riser system inconsistency
+   - Trim system variation
+   - Manufacturer data mismatch
+
+2. **Data Integrity**
+   - Session corruption
+   - Measurement anomalies
+   - Validation failures
+   - Report generation issues
+
+3. **User Experience**
+   - Measurement guidance
+   - Validation feedback
+   - Safety narrative
+   - Error recovery
+
+## Recovery Procedures
+
+### Measurement Recovery
+- Re-measurement protocol
+- Cascade group verification
+- Riser system check
+- Trim system validation
+- Tool calibration verification
+
+### Data Recovery
+- Session state restoration
+- Measurement verification
+- Validation state recovery
+- Safety checkpoint restoration
+
+### User Recovery
+- Clear error messaging
+- Measurement guidance
+- Validation assistance
+- Safety narrative support
+
+## Validation Thresholds
+
+### Line Measurements
+- Cascade group deviation >10mm → warning
+- Tab length variation >5mm → check
+- Line material mismatch → block
+- Wrong cascade position → block
+
+### Riser System
+- Riser length difference >15mm → warning
+- Trim system position incorrect → check
+- Tandem trim variation → verify
+- Back riser trimmer position → validate
+
+### General Measurements
+- Laser measurement error >100mm → recheck
+- Environmental impact → verify
+- Tool calibration drift → recalibrate
+- Operator error → retrain
+
+## Edge Case Handling
+
+### Tandem Gliders
+- Special trim system handling
+- Back riser trimmer position
+- Riser length variations
+- Cascade group differences
+
+### Trim Systems
+- Neutral position verification
+- Manufacturer-specific requirements
+- Trim system calibration
+- Riser length validation
+
+### Manufacturer Variations
+- Age-related specifications
+- Protocol differences
+- Material variations
+- Trim system requirements
