@@ -13,19 +13,19 @@ This is a focused, minimal Phase One implementation designed to be extended in f
 
 ## Core Principles
 
-1. **Safety First**: Every feature must serve the core purpose of protecting human life in flight
-2. **Technician Augmentation**: Support and enhance technician judgment, not replace it
-3. **Explicit Validation**: Clear safety checkpoints and validation steps
-4. **Adaptive Support**: Context-aware decision support that adapts to technician experience
-5. **Accountability**: Clear documentation of decisions and rationale
-6. **Continuous Improvement**: System learns from technician feedback and workshop patterns
-7. **Manufacturer Compliance**: Strict adherence to manufacturer specifications and service guidelines
-8. **Certification Standards**: Alignment with EN/LTF/DHV certification requirements
-9. **APPI Methodology**: Strict adherence to APPI inspection and measurement protocols
-10. **Data Integrity**: Version-controlled manufacturer data with traceable modifications
-11. **Custom Data Integrity**: Maintain safety standards even with technician-added data
-12. **Validation Transparency**: Clear documentation of data sources and validation methods
-13. **Workshop Knowledge**: Capture and preserve workshop expertise
+1. **Safety First**: Every feature must implement explicit APPI validation and manufacturer safety thresholds
+2. **Technician Augmentation**: Support technician decisions with APPI methodology and manufacturer specifications
+3. **Explicit Validation**: Implement APPI compliance checks with clear pass/fail states
+4. **Adaptive Support**: Provide context-specific guidance based on glider model and certification class
+5. **Accountability**: Track all safety decisions with technician signatures and version history
+6. **Continuous Improvement**: Log workshop patterns and technician feedback for validation rules
+7. **Manufacturer Compliance**: Implement manufacturer-specific validation rules and thresholds
+8. **Certification Standards**: Enforce EN/LTF/DHV certification requirements with explicit checks
+9. **APPI Methodology**: Implement APPI inspection protocols with measurement validation
+10. **Data Integrity**: Track all manufacturer data changes with version control and audit trails
+11. **Custom Data Integrity**: Validate technician-added data against APPI standards
+12. **Validation Transparency**: Document data sources and validation methods with confidence levels
+13. **Workshop Knowledge**: Capture workshop expertise with pattern recognition and feedback loops
 
 ## Goals
 
@@ -180,60 +180,60 @@ This is a focused, minimal Phase One implementation designed to be extended in f
 - Assign unique inspection ID (auto-generated)
 - Select glider model + size from dropdown or custom input (manufacturer data)
 - Record:
-  - Date
-  - Technician name
+  - Date (ISO 8601 format)
+  - Technician name (with signature validation)
   - Serial number / customer reference
   - Current glider inspection information
 - Implement safety checkpoints:
-  - Pre-inspection validation
-  - Critical measurement verification
-  - Risk assessment matrix
-  - Technician confidence scoring
+  - Pre-inspection validation against APPI standards
+  - Critical measurement verification with pass/fail states
+  - Risk assessment matrix with explicit thresholds
+  - Technician confidence scoring (1-5 scale)
 - Adaptive support features:
-  - Context-aware decision trees
-  - Experience-level appropriate guidance
-  - Workshop-specific pattern recognition
-  - Collaborative decision support
+  - Context-specific decision trees based on glider model
+  - Experience-level appropriate guidance with APPI methodology
+  - Workshop pattern recognition with validation history
+  - Collaborative decision support with technician signatures
 
 ### C. Condition Logging - Initial Diagnosis
 
 - Enhanced checklist-based inspection with:
-  - Decision trees for complex assessments
-  - Safety validation at each step
-  - Technician confidence scoring
-  - Risk assessment matrix
-  - Cross-validation rules
-  - Certification class specific requirements
-  - APPI methodology validation
-  - Manufacturer-specific rules
-  - Measurement protocol compliance
-  - Safety validation history
+  - Decision trees implementing APPI methodology
+  - Safety validation with pass/fail states
+  - Technician confidence scoring (1-5 scale)
+  - Risk assessment matrix with explicit thresholds
+  - Cross-validation against manufacturer specifications
+  - Certification class specific requirements with validation rules
+  - APPI methodology validation with measurement protocols
+  - Manufacturer-specific rules with safety thresholds
+  - Measurement protocol compliance with APPI standards
+  - Safety validation history with version tracking
 - Measurement system:
-  - Adaptive measurement protocols
-  - Real-time validation
-  - Anomaly detection
-  - Historical comparison
-  - Calibration verification
-  - Manufacturer-specific tolerances
-  - Certification class requirements
-  - APPI load distribution
-  - Line strength thresholds
-  - Measurement method validation
-  - Profile type detection
+  - APPI measurement protocols with validation rules
+  - Real-time validation against manufacturer specs
+  - Anomaly detection with threshold alerts
+  - Historical comparison with version history
+  - Calibration verification with technician signature
+  - Manufacturer-specific tolerances with pass/fail states
+  - Certification class requirements with validation rules
+  - APPI load distribution with percentage thresholds
+  - Line strength thresholds with safety factors
+  - Measurement method validation with APPI standards
+  - Profile type detection with explicit classification
 - Trim assessment:
-  - Line length differentials
-  - Profile shape analysis
-  - Loop complexity classification (1-5)
-  - Performance vs stability evaluation
-  - Manufacturer trim guidelines
-  - Certification class requirements
-- Optional image attachments (local file only)
+  - Line length differentials with APPI methodology
+  - Profile shape analysis with explicit classification
+  - Loop complexity classification (1-5 scale)
+  - Performance vs stability evaluation with thresholds
+  - Manufacturer trim guidelines with validation rules
+  - Certification class requirements with pass/fail states
+- Optional image attachments (local file only, max 5MB per image)
 - Technician feedback integration:
-  - Decision rationale capture
-  - Experience-based insights
-  - Workshop-specific patterns
-  - Safety narrative generation
-  - Certification compliance documentation
+  - Decision rationale with signature validation
+  - Experience-based insights with confidence scoring
+  - Workshop-specific patterns with validation history
+  - Safety narrative generation with APPI methodology
+  - Certification compliance documentation with version tracking
 
 ### D. Repair Log
 
@@ -252,16 +252,18 @@ This is a focused, minimal Phase One implementation designed to be extended in f
 ### E. Report Generation
 
 - Generate a local PDF summary for each glider
-  - Includes inspection results, repairs, technician notes
-  - Safety clearance documentation
-  - Risk assessment summary
-  - Critical point highlighting
-  - Technician certification verification
-  - Decision rationale and context
-  - Workshop-specific insights
-  - Safety narrative
-  - Option to include images
-  - Saved to local storage, printable
+  - Includes inspection results with APPI validation
+  - Repairs with technician signatures
+  - Safety clearance documentation with version history
+  - Risk assessment summary with explicit thresholds
+  - Critical point highlighting with pass/fail states
+  - Technician certification verification with signature
+  - Decision rationale with APPI methodology
+  - Workshop-specific insights with confidence scoring
+  - Safety narrative with validation history
+  - Optional images (max 5MB each)
+  - Saved to local storage with checksum verification
+  - Printable with APPI-compliant layout
 
 ### F. Data Management
 
@@ -289,46 +291,46 @@ These may be addressed in a future PRD for paraMOT.Cloud.
 
 ## Development Strategy
 
-- **Approach**: Vertical Slice — build end-to-end flow for one feature at a time
+- **Approach**: Vertical Slice — implement end-to-end APPI validation for one feature at a time
 - **Priority Order**:
-    1. Safety Validation Layer
-    2. APPI Methodology Implementation
-    3. Manufacturer Data Versioning
-    4. Reference Data Model
-    5. Inspection Session UI with Safety Checkpoints
-    6. Adaptive Decision Support System
-    7. Condition Logger with Validation
-    8. Repair Log with Safety Documentation
-    9. PDF Generator with Safety Narrative
-    10. File/Image Upload
-    11. Technician Feedback Integration
-    12. Workshop Pattern Recognition
+    1. Safety Validation Layer with APPI methodology
+    2. APPI Methodology Implementation with measurement protocols
+    3. Manufacturer Data Versioning with audit trails
+    4. Reference Data Model with validation rules
+    5. Inspection Session UI with APPI checkpoints
+    6. Decision Support System with manufacturer specs
+    7. Condition Logger with APPI validation
+    8. Repair Log with safety documentation
+    9. PDF Generator with APPI-compliant layout
+    10. File/Image Upload with size limits
+    11. Technician Feedback Integration with signatures
+    12. Workshop Pattern Recognition with validation history
 
 ## Safety Implementation Strategy
 
 1. **Phase 1: Explicit Safety**
-   - Implement core safety validation
-   - Add explicit checkpoints
-   - Establish measurement protocols
-   - Create basic decision trees
-   - Implement APPI methodology
-   - Set up manufacturer rule engine
+   - Implement APPI validation rules
+   - Add explicit checkpoints with pass/fail states
+   - Establish APPI measurement protocols
+   - Create decision trees with manufacturer specs
+   - Implement APPI methodology with validation
+   - Set up manufacturer rule engine with thresholds
 
 2. **Phase 2: Adaptive Support**
-   - Add context-aware decision support
-   - Implement technician feedback
+   - Add context-specific decision support
+   - Implement technician feedback with signatures
    - Develop workshop pattern recognition
-   - Create safety narratives
-   - Add measurement validation
-   - Implement profile detection
+   - Create safety narratives with APPI methodology
+   - Add measurement validation with thresholds
+   - Implement profile detection with classification
 
 3. **Phase 3: Integration**
-   - Combine explicit and adaptive features
+   - Combine APPI and manufacturer validation
    - Refine based on workshop feedback
-   - Enhance safety protocols
-   - Expand decision support
-   - Validate APPI compliance
-   - Verify manufacturer rules
+   - Enhance safety protocols with thresholds
+   - Expand decision support with signatures
+   - Validate APPI compliance with version history
+   - Verify manufacturer rules with audit trails
 
 ## Naming & Identity
 

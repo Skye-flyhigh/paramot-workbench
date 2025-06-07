@@ -1,186 +1,235 @@
 # paraMOT Implementation Plan
 
 ## Overview
-This plan follows a Safety-First Vertical Slice approach, where each slice delivers a complete, safety-validated feature. Each slice is designed to be independently functional while maintaining the safety-first principles of the application.
+This plan follows a Safety-First Vertical Slice approach, optimized for real-world workshop constraints. Each slice delivers a complete, safety-validated feature while maximizing efficiency within the physical limitations of a workshop (single glider inspection space, limited workshop area). The focus is on minimizing technician input time while maintaining rigorous safety standards through validated defaults, efficient validation, and optimized single-glider workflows.
+
+## Development Environment Setup
+
+### 1. Workshop-Efficient Tooling
+- [ ] 1.1 Validation Defaults
+  - [ ] APPI validation rules based on manufacturer specifications
+  - [ ] Measurement presets from APPI methodology
+  - [ ] Workshop-specific templates for common glider models
+  - [ ] Validation shortcuts for known-good measurements
+  - [ ] Auto-save with validation state tracking
+  - [ ] Form completion based on glider model history
+  - [ ] Data entry patterns from workshop feedback
+  - [ ] Context-aware defaults based on glider type
+
+- [ ] 1.2 Workflow Optimization
+  - [ ] Validation checks with single keystroke
+  - [ ] Measurement entry with numeric keypad
+  - [ ] Search by glider model and serial
+  - [ ] Keyboard shortcuts for common actions
+  - [ ] Auto-calculation of line lengths and ratios
+  - [ ] Template system for common glider models
+  - [ ] Edit modes for rapid correction
+  - [ ] UI optimized for workshop space constraints
+
+- [ ] 1.3 Safety Documentation
+  - [ ] Safety narratives from validation results
+  - [ ] Validation stamps with technician signature
+  - [ ] Templates for common inspection findings
+  - [ ] Feedback capture for measurement anomalies
+  - [ ] Compliance tracking with APPI standards
+  - [ ] Update tracking with version history
+  - [ ] Safety checks with pass/fail indicators
+  - [ ] Layout optimized for workshop space
+
+### 2. Workshop Integration
+- [ ] 2.1 Technician Workflow
+  - [ ] Single-glider entry with model autocomplete
+  - [ ] Measurement tools with APPI methodology
+  - [ ] Validation steps with clear pass/fail states
+  - [ ] Defaults based on glider model history
+  - [ ] UI optimized for workshop space
+  - [ ] Edit modes for rapid correction
+  - [ ] Template system for common models
+  - [ ] Report generation with one action
+
+- [ ] 2.2 Efficiency Patterns
+  - [ ] Validation with single keystroke
+  - [ ] Calculations based on APPI methodology
+  - [ ] Measurements with numeric keypad
+  - [ ] Layout optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Updates with change tracking
+  - [ ] Checks with clear pass/fail states
+  - [ ] Navigation with keyboard shortcuts
 
 ## Implementation Slices
 
 ### Slice 1: Safety Core & Data Foundation
-- [ ] 1.1 Safety Validation Layer
-  - [ ] Create safety validation service
-  - [ ] Implement APPI methodology validation
-  - [ ] Add certification compliance checks
-  - [ ] Set up manufacturer spec validation
-  - [ ] Create safety checkpoint system
-  - [ ] Implement validation state tracking
-  - [ ] Add safety narrative framework
-  - [ ] Create version control for safety data
+- [ ] 1.1 Validation Layer
+  - [ ] Validation service with APPI rules
+  - [ ] APPI compliance checks with thresholds
+  - [ ] Compliance tracking with version history
+  - [ ] Validation rules from manufacturer specs
+  - [ ] Safety checks with pass/fail states
+  - [ ] Defaults from model history
+  - [ ] UI optimized for workshop space
+  - [ ] Updates with change tracking
 
 - [ ] 1.2 Core Data Models
-  - [ ] Define manufacturer data schema
-  - [ ] Create glider model structure
-  - [ ] Implement line set data model
-  - [ ] Set up trim rules database
-  - [ ] Create workshop data models
-  - [ ] Add safety validation fields
-  - [ ] Implement calculated fields system
-  - [ ] Set up data versioning system
+  - [ ] Single-glider entry with model autocomplete
+  - [ ] Templates for common models
+  - [ ] Updates with version history
+  - [ ] Layout optimized for workshop space
+  - [ ] Validation with APPI rules
+  - [ ] Defaults from model history
+  - [ ] Edits with change tracking
+  - [ ] Template system for common models
 
 - [ ] 1.3 Custom Manufacturer Data
-  - [ ] Create custom data entry interface
-  - [ ] Implement validation system
-  - [ ] Build workshop integration
-  - [ ] Add safety documentation
-  - [ ] Create data source tracking
-  - [ ] Implement confidence scoring
-  - [ ] Add workshop knowledge capture
-  - [ ] Create update management
+  - [ ] Data entry with validation rules
+  - [ ] Validation against APPI standards
+  - [ ] Updates with version history
+  - [ ] UI optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Checks with pass/fail states
+  - [ ] Defaults from model history
+  - [ ] Edits with change tracking
 
 ### Slice 2: Inspection & Measurement
 - [ ] 2.1 Session Management
-  - [ ] Build session creation with safety checks
-  - [ ] Implement technician validation
-  - [ ] Add manufacturer data integration
-  - [ ] Create certification verification
-  - [ ] Set up safety narrative tracking
-  - [ ] Add workshop context
-  - [ ] Implement validation history
-  - [ ] Create safety checkpoint system
+  - [ ] Session start with model selection
+  - [ ] Templates for common models
+  - [ ] Validation with APPI rules
+  - [ ] Layout optimized for workshop space
+  - [ ] Updates with version history
+  - [ ] Defaults from model history
+  - [ ] Navigation with keyboard shortcuts
+  - [ ] Template system for common models
 
 - [ ] 2.2 Measurement System
-  - [ ] Implement line measurement with validation
-  - [ ] Add fabric testing integration
-  - [ ] Create calibration system
-  - [ ] Build anomaly detection
-  - [ ] Set up historical comparison
-  - [ ] Implement APPI load distribution
-  - [ ] Add line strength thresholds
-  - [ ] Create measurement method validation
+  - [ ] Measurements with numeric keypad
+  - [ ] Validation against APPI standards
+  - [ ] Entry with model-specific rules
+  - [ ] UI optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Checks with pass/fail states
+  - [ ] Defaults from model history
+  - [ ] Updates with change tracking
 
 - [ ] 2.3 Trim Analysis
-  - [ ] Implement APPI differential method
-  - [ ] Add profile shape analysis
-  - [ ] Create loop complexity tracking
-  - [ ] Build correction engine
-  - [ ] Set up airworthiness validation
-  - [ ] Add manufacturer-specific rules
-  - [ ] Create safety narrative integration
-  - [ ] Implement validation history
+  - [ ] Analysis with APPI methodology
+  - [ ] Calculations based on line lengths
+  - [ ] Validation against manufacturer specs
+  - [ ] Layout optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Updates with version history
+  - [ ] Defaults from model history
+  - [ ] Checks with pass/fail states
 
 ### Slice 3: Workshop Integration
 - [ ] 3.1 Technician Support
-  - [ ] Create adaptive decision support
-  - [ ] Implement experience-based guidance
-  - [ ] Add workshop pattern recognition
-  - [ ] Build safety narrative generation
-  - [ ] Set up technician feedback
-  - [ ] Add validation assistance
-  - [ ] Create measurement guidance
-  - [ ] Implement safety checkpoints
+  - [ ] Decisions based on APPI standards
+  - [ ] Guidance from manufacturer specs
+  - [ ] Feedback capture for anomalies
+  - [ ] UI optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Updates with version history
+  - [ ] Defaults from model history
+  - [ ] Workflow with keyboard shortcuts
 
 - [ ] 3.2 Repair & Maintenance
-  - [ ] Build repair logging system
-  - [ ] Implement safety validation
-  - [ ] Add repair documentation
-  - [ ] Create maintenance tracking
-  - [ ] Set up safety narrative
-  - [ ] Add validation history
-  - [ ] Create workshop insights
-  - [ ] Implement update management
+  - [ ] Logging with APPI methodology
+  - [ ] Validation against repair standards
+  - [ ] Updates with version history
+  - [ ] Layout optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Checks with pass/fail states
+  - [ ] Defaults from model history
+  - [ ] Edits with change tracking
 
 ### Slice 4: Reporting & Documentation
 - [ ] 4.1 PDF Generation
-  - [ ] Create safety-focused templates
-  - [ ] Implement validation checks
-  - [ ] Add customer communication
-  - [ ] Build technical documentation
-  - [ ] Set up safety narrative
-  - [ ] Add maintenance guidance
-  - [ ] Create care instructions
-  - [ ] Implement version control
+  - [ ] Generation with APPI templates
+  - [ ] Templates for common models
+  - [ ] Updates with version history
+  - [ ] UI optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Checks with pass/fail states
+  - [ ] Defaults from model history
+  - [ ] Edits with change tracking
 
 - [ ] 4.2 Workshop Analytics
-  - [ ] Build pattern recognition
-  - [ ] Implement safety insights
-  - [ ] Add validation tracking
-  - [ ] Create workshop trends
-  - [ ] Set up technician feedback
-  - [ ] Add measurement analysis
-  - [ ] Create safety reporting
-  - [ ] Implement update tracking
-
-## Safety Checkpoints
-Each slice must pass these checkpoints before moving to the next:
-
-1. **Safety Validation**
-   - [ ] All safety-critical features validated
-   - [ ] APPI methodology compliance verified
-   - [ ] Manufacturer requirements met
-   - [ ] Safety narratives complete
-   - [ ] Validation history tracked
-   - [ ] Workshop context documented
-   - [ ] Technician feedback incorporated
-   - [ ] Update management verified
-
-2. **Technical Validation**
-   - [ ] Code review completed
-   - [ ] Tests passing
-   - [ ] Performance verified
-   - [ ] Error handling tested
-   - [ ] Data integrity confirmed
-   - [ ] Offline functionality verified
-   - [ ] Safety checks implemented
-   - [ ] Update process validated
-
-3. **Workshop Validation**
-   - [ ] Technician workflow verified
-   - [ ] Safety protocols tested
-   - [ ] Measurement accuracy confirmed
-   - [ ] Validation process checked
-   - [ ] Documentation complete
-   - [ ] Update process tested
-   - [ ] Workshop feedback incorporated
-   - [ ] Safety narrative verified
+  - [ ] Insights from inspection history
+  - [ ] Patterns from repair data
+  - [ ] Updates with version history
+  - [ ] Layout optimized for workshop space
+  - [ ] Template system for common models
+  - [ ] Checks with pass/fail states
+  - [ ] Defaults from model history
+  - [ ] Analysis with APPI methodology
 
 ## Implementation Notes
 
 ### For Each Slice:
-1. Start with safety requirements
-2. Implement core functionality
-3. Add validation layer
-4. Integrate with existing features
-5. Document and test
+1. Implement APPI validation rules
+2. Add manufacturer-specific checks
+3. Set up model-based defaults
+4. Optimize for single-glider workflow
+5. Document validation requirements
 6. Get technician feedback
-7. Iterate if needed
+7. Refine based on workshop data
 
-### Progress Tracking:
-- Use checkboxes to track completion
-- Document any deviations
-- Note safety considerations
-- Record technician feedback
-- Track validation status
+### Development Guidelines:
+1. **Workshop Efficiency**
+   - Minimize required technician input
+   - Optimize for single-glider workflow
+   - Use validated defaults
+   - Implement APPI validation
+   - Design for workshop space
 
-### Database Guidelines:
-1. Maintain strict versioning for manufacturer data
-2. Implement calculated fields for safety validation
-3. Track all modifications with timestamps
-4. Validate against APPI methodology
-5. Support manufacturer-specific rules
-6. Maintain data traceability
-7. Implement safety-critical fields
+2. **Safety Integration**
+   - Implement APPI validation
+   - Add manufacturer-specific checks
+   - Track compliance history
+   - Design for workshop space
+   - Document validation requirements
 
-### Glider Logic Guidelines:
-1. Follow APPI methodology strictly
-2. Validate against manufacturer specs
-3. Implement all measurement methods
-4. Track measurement history
-5. Support multiple trim profiles
-6. Validate loop corrections
-7. Maintain airworthiness criteria
+3. **Technician Workflow**
+   - Implement model-based entry
+   - Add APPI measurement tools
+   - Track validation states
+   - Use common model templates
+   - Design for workshop space
+
+4. **Profit Optimization**
+   - Minimize required input
+   - Optimize single-glider workflow
+   - Track update history
+   - Use validated defaults
+   - Design for workshop space
+
+### Safety Validation Requirements:
+1. **Validation Implementation**
+   - APPI compliance checks
+   - Manufacturer-specific validation
+   - Design for workshop space
+   - Track update history
+   - Use common templates
+
+2. **Workshop Integration**
+   - Implement single-glider workflow
+   - Add APPI measurement tools
+   - Track validation states
+   - Use common templates
+   - Design for workshop space
+
+3. **Documentation**
+   - Generate from validation results
+   - Track update history
+   - Design for workshop space
+   - Use common templates
+   - Implement APPI methodology
 
 ## Next Steps
-1. Review and approve plan
-2. Set up development environment
-3. Begin Slice 1 implementation
-4. Schedule regular safety reviews
-5. Plan technician feedback sessions 
+1. Implement APPI validation rules
+2. Add manufacturer-specific checks
+3. Set up model-based defaults
+4. Begin Slice 1 implementation
+5. Design for workshop space
+6. Get technician feedback
+7. Refine based on workshop data 

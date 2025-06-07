@@ -176,4 +176,4 @@ To contribute, please:
 
 ## 📝 License
 
-MPL v1.0 License — See [LICENSE](./LICENSE) for details.
+MPL v1.0 License — See [LICENSE](./LICENSE.md) for details.
