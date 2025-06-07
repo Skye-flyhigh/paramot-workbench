@@ -1,0 +1,26 @@
+---
+description: Frontend expectations
+globs: 
+alwaysApply: false
+---
+
+# Frontend Environment Rules
+
+- **Framework**: React with Shadcn UI + Tailwind CSS
+- **Rendering**: Client-side only (Electron)
+- **State Management**: Zustand (preferred), local state when isolated
+- **Component Boundaries**:
+  - UI elements should be modular
+  - Reusable form and checklist components encouraged
+  - Use features/ folder for domain-specific UIs (e.g., inspections, repairs)
+- **Styling Rules**:
+  - Tailwind utility-first
+  - Custom themes must follow accessibility contrast standards
+  - Avoid hardcoding colors, use theme tokens
+
+## UX Notes
+
+- Must function offline
+- Minimal UI clutter
+- Keyboard shortcuts encouraged
+- Prefer dropdowns with auto-complete for technician speed

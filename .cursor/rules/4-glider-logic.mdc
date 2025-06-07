@@ -1,0 +1,93 @@
+---
+description: Domain-specific logic for glider inspection, line trimming, and airworthiness evaluation based on APPI methodology
+globs: []
+alwaysApply: false
+---
+
+# Glider Logic – Trim, Line Strength, and Inspection Rules
+
+## 1. Line Strength Assessment
+
+### Load Distribution (APPI Table)
+- For gliders with 4 rows (A–D): use [40%, 35%, 20%, 5%]
+- For gliders with 3 rows: [50%, 40%, 10%]
+- For 2 rows: [65%, 35%]
+- Stabilo lines are not counted
+
+### Destructive Test Thresholds:
+- **Warning**: <20% of original strength → recheck in 50h or 100 flights
+- **Reject**: <10% of original strength
+
+### Non-Destructive Test Thresholds:
+- Load test = 8G of Max TFW + 20% of strength range
+- Line types:  
+  - **Vectran**: recheck every 50h / 100 flights  
+  - **Dyneema**: generally not tested unless suspicious  
+  - **Aramid**: full-length test, tracked per line type
+
+## 2. Trim Differential Calculation
+
+### APPI Differential Method
+- Compare A–B and A–C for each group (Inside, Mid, Out, Stabilo)
+- Trim goal: bring differential close to **0mm**
+- Adjust loops accordingly:
+  - Reference is set to lowest point in group
+  - Loop the others to match it (see "loops correct" tables)
+  - Typical loop types: 1 loop (malion), 2 loops (lark’s foot), etc.
+
+### APPI Airworthiness Trim Criteria
+- Flat Aspect Ratio ≤5 → deviation limit 20mm (maintenance)
+- ≤6 → 15mm
+- ≤6.5 → 10mm
+- >6.5 → 10mm max
+
+## 3. Measurement Methods
+
+### Laser Method (Worner, VLS)
+- Measures total line length vs official specs
+- Accuracy requires constant tension (recommended: 5 daN)
+- Rail-based measurement has lower dispersion
+
+### Differential Method
+- Measures difference between cascades (A–B, A–C)
+- Easier, faster, lower dispersion
+- Tension evenly via ETT between 3–10 daN
+
+## 4. Trim Profiles (Illustrative)
+- Reflex profile = stable (C longest)
+- Accelerated = B/C longer than A
+- Slowed = B/C shorter
+- Unstable = B longer, C shorter → avoid
+
+## 5. Correction Engine Logic
+
+- Detect loop presence visually
+- Recommend loop additions per group
+    - 1 = simple loop (shortens by approx 10mm)
+    - 2 = double loop (shortens by approx 15mm)
+    - 3 = lark's foot (shortens by approx 25mm)
+    - 4 = lark's foot with an extra loop on maillon or upper cascade (shortens by approx 35mm)
+    - 5 = lark's foot with an extra loop on maillon and upper cascade loop (shortens by approx 45mm)
+- Update diagnostic table with:
+  - Trim deviation
+  - Suggested correction
+  - Loop recommendation (count + method)
+- Optionally, flag when overlooped and suggest removal
+
+## 6. Cloth & Stitching Assessment
+
+### Permeability (JDC)
+- Measure 4 points across Z (leading edge)
+- Discard cells <200 sec
+- Check if coating loss corresponds to cloth stiffness loss
+
+### Stitching
+- Visual condition (OK, Warning, Critical)
+- Optionally, mark repaired panels with zone and surface
+
+---
+
+## ⚠️ Notes
+- Always double-check left/right group logic before applying loops
+- Avoid mixing differential and total length methods without recalibration
+- When APPI data is missing, default to caution: suggest rejection threshold at 20% strength

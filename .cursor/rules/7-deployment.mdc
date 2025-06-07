@@ -1,0 +1,29 @@
+---
+description: Deployment strategy
+globs: 
+alwaysApply: false
+---
+
+# Deployment Targets
+
+macOS (M1/M2+)
+
+Windows 10+
+
+Installer
+
+Use electron-builder or electron-forge
+
+Output: .dmg (mac), .exe (win)
+
+Build Steps
+
+Compile Electron frontend
+
+Bundle SQLite with app
+
+Ensure write access to ~/Documents/Thermix/
+
+Code sign (optional)
+
+Test offline mode before release

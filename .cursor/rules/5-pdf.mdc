@@ -1,0 +1,21 @@
+---
+description: Glider servicing report PDF format
+globs: 
+alwaysApply: false
+---
+
+# PDF Output Rules
+
+Library: jsPDF or pdf-lib
+Trigger: Manual generation per inspection session
+Inclusions
+Technician details
+Glider metadata
+Trim results and differential comparisons
+Repair log
+Optional: Images, if added by technician
+Layout Rules
+Title + header page (logo optional)
+Summary page (glider + inspection)
+Condition pages per section (lines, fabric, risers)
+Trim page with differential diagrams (later)

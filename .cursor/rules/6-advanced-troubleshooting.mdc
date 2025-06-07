@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Known Issues to Handle
+
+PDF generator crashes when images are corrupted
+
+Unexpected trim results (flag if lines differ >10mm from ref)
+
+Technician error: missing measurement → show warning before report generation
+
+File write permissions on macOS sandboxed environment
