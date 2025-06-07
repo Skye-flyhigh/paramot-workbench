@@ -1,6 +1,6 @@
 ---
 description: Domain-specific logic for glider inspection, line trimming, and airworthiness evaluation based on APPI methodology
-globs: []
+globs: 
 alwaysApply: false
 ---
 
@@ -29,17 +29,18 @@ alwaysApply: false
 
 ### APPI Differential Method
 - Compare A–B and A–C for each group (Inside, Mid, Out, Stabilo)
-- Trim goal: bring differential close to **0mm**
-- Adjust loops accordingly:
-  - Reference is set to lowest point in group
-  - Loop the others to match it (see "loops correct" tables)
-  - Typical loop types: 1 loop (malion), 2 loops (lark’s foot), etc.
-
-### APPI Airworthiness Trim Criteria
-- Flat Aspect Ratio ≤5 → deviation limit 20mm (maintenance)
-- ≤6 → 15mm
-- ≤6.5 → 10mm
-- >6.5 → 10mm max
+- **Deviation limit is based on aspect ratio:**
+  - Flat Aspect Ratio ≤5 → deviation limit ±20mm (maintenance)
+  - ≤6 → ±15mm
+  - ≤6.5 → ±10mm
+  - >6.5 → ±10mm max
+- **If differential exceeds limit, recommend correction loops**
+- Correction: 1 loop ≈ 10mm adjustment
+- Record both manufacturer spec and measured values for each group
+- Suggest loop corrections (add/remove) based on lowest reference point
+- Track correction history and technician rationale
+- **Technician workflow must support input of both manufacturer and measured values**
+- **Integrate APPI checklist for comprehensive validation**
 
 ## 3. Measurement Methods
 

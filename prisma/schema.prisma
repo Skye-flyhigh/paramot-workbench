@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Core validation models
+model ValidationRule {
+  id          String   @id @default(uuid())
+  type        String   // APPI, SAFETY, CUSTOM
+  name        String
+  description String
+  parameters  Json     // Validation rule parameters
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([type])
+}
+
+model Validation {
+  id              String   @id @default(uuid())
+  gliderModel     String
+  validationType  String   // APPI, SAFETY, CUSTOM
+  status          String   // PASS, FAIL, WARNING
+  details         Json     // Validation results
+  technicianId    String
+  technician      Technician @relation(fields: [technicianId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([gliderModel])
+}
+
+model ManufacturerData {
+  id          String   @id @default(uuid())
+  brand       String
+  model       String
+  data        Json     // Manufacturer specifications
+  source      String   // OFFICIAL, CUSTOM
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([brand, model])
+  @@index([brand, model])
+}
+
+model Technician {
+  id            String   @id @default(uuid())
+  name          String
+  certification String
+  validations   Validation[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([certification])
+}
+
+// Indexes for performance
+index ValidationRule_type_idx on ValidationRule(type)
+index Validation_gliderModel_idx on Validation(gliderModel)
+index ManufacturerData_brand_model_idx on ManufacturerData(brand, model)
+index Technician_certification_idx on Technician(certification)

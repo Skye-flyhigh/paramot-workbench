@@ -6,9 +6,17 @@ This plan follows a Safety-First Vertical Slice approach, optimized for real-wor
 ## Development Environment Setup
 
 ### 1. Workshop-Efficient Tooling
-- [ ] 1.1 Validation Defaults
-  - [ ] APPI validation rules based on manufacturer specifications
-  - [ ] Measurement presets from APPI methodology
+- [x] 1.1 Development Environment
+  - [x] React + Electron setup
+  - [x] TypeScript configuration
+  - [x] Tailwind CSS integration
+  - [x] Shadcn/ui component library
+  - [x] Path aliases for code organization
+  - [x] Development server configuration
+  - [x] Basic validation form implementation
+  - [x] APPI validation rules based on manufacturer specifications and aspect ratio
+  - [ ] Measurement presets from APPI methodology (including group differentials)
+  - [ ] Flexible group/line data model (supports 2, 3, or 4 risers/line groups)
   - [ ] Workshop-specific templates for common glider models
   - [ ] Validation shortcuts for known-good measurements
   - [ ] Auto-save with validation state tracking
@@ -17,8 +25,8 @@ This plan follows a Safety-First Vertical Slice approach, optimized for real-wor
   - [ ] Context-aware defaults based on glider type
 
 - [ ] 1.2 Workflow Optimization
-  - [ ] Validation checks with single keystroke
-  - [ ] Measurement entry with numeric keypad
+  - [ ] Dynamic UI for group/line input (renders based on glider config)
+  - [x] Validation logic for variable riser/line configs
   - [ ] Search by glider model and serial
   - [ ] Keyboard shortcuts for common actions
   - [ ] Auto-calculation of line lengths and ratios
@@ -27,6 +35,7 @@ This plan follows a Safety-First Vertical Slice approach, optimized for real-wor
   - [ ] UI optimized for workshop space constraints
 
 - [ ] 1.3 Safety Documentation
+  - [x] APPI checklist UI and summary
   - [ ] Safety narratives from validation results
   - [ ] Validation stamps with technician signature
   - [ ] Templates for common inspection findings
@@ -60,9 +69,19 @@ This plan follows a Safety-First Vertical Slice approach, optimized for real-wor
 ## Implementation Slices
 
 ### Slice 1: Safety Core & Data Foundation
-- [ ] 1.1 Validation Layer
-  - [ ] Validation service with APPI rules
-  - [ ] APPI compliance checks with thresholds
+- [x] 1.1 Validation Layer
+  - [x] Basic project structure
+  - [x] Development environment setup
+  - [x] Basic validation service implementation
+  - [x] Initial validation form UI
+  - [x] APPI compliance checks with aspect-ratio-based thresholds
+  - [x] Differential analysis for each group (A-B, A-C)
+  - [x] Correction loop suggestion logic
+  - [x] APPI checklist integration (see example)
+  - [ ] Flexible group/line data model (supports 2, 3, or 4 risers/line groups)
+  - [ ] Dynamic UI for group/line input
+  - [ ] Validation logic for variable riser/line configs
+  - [x] APPI checklist UI and summary
   - [ ] Compliance tracking with version history
   - [ ] Validation rules from manufacturer specs
   - [ ] Safety checks with pass/fail states
@@ -166,13 +185,16 @@ This plan follows a Safety-First Vertical Slice approach, optimized for real-wor
 ## Implementation Notes
 
 ### For Each Slice:
-1. Implement APPI validation rules
+1. Implement APPI validation rules (aspect-ratio-based)
 2. Add manufacturer-specific checks
 3. Set up model-based defaults
 4. Optimize for single-glider workflow
 5. Document validation requirements
 6. Get technician feedback
 7. Refine based on workshop data
+8. Integrate group-based differential and correction logic
+9. Support technician input for both manufacturer and measured values
+10. Integrate APPI checklist as per real-world example
 
 ### Development Guidelines:
 1. **Workshop Efficiency**
@@ -226,10 +248,15 @@ This plan follows a Safety-First Vertical Slice approach, optimized for real-wor
    - Implement APPI methodology
 
 ## Next Steps
-1. Implement APPI validation rules
-2. Add manufacturer-specific checks
-3. Set up model-based defaults
-4. Begin Slice 1 implementation
-5. Design for workshop space
-6. Get technician feedback
-7. Refine based on workshop data 
+1. [x] Set up development environment
+2. [x] Configure build tools and dependencies
+3. [x] Implement basic validation service
+4. [ ] Implement APPI validation rules
+5. [ ] Add manufacturer-specific checks
+6. [ ] Set up model-based defaults
+7. [ ] Begin Slice 1 implementation
+8. [ ] Design for workshop space
+9. [ ] Get technician feedback
+10. [ ] Refine based on workshop data
+
+- The data model, UI, and validation logic now support gliders with 2, 3, or 4 risers/line groups. All group/line rendering and validation is dynamic based on the glider's configuration. 

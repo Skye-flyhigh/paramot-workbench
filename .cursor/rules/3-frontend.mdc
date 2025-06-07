@@ -1,5 +1,5 @@
 ---
-description: 
+description: UI build and UX consideration
 globs: 
 alwaysApply: false
 ---
@@ -132,7 +132,6 @@ alwaysApply: false
 - Minimal UI clutter
 - Keyboard shortcuts encouraged
 - Prefer dropdowns with auto-complete for technician speed
-
 ### Safety Requirements
 - Clear validation state indication
 - Immediate error feedback
@@ -237,3 +236,4 @@ alwaysApply: false
 - Cancel options
 - Help resources
 - Documentation links
+

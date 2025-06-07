@@ -83,16 +83,16 @@ This is a focused, minimal Phase One implementation designed to be extended in f
 
 - **Trim Rules**
   - Measurement reference point
-  - Acceptable differentials
+  - Acceptable differentials (aspect-ratio-based, e.g. ±10mm for A.R. 6.44)
   - Loop type mapping (1-5 complexity scale)
   - Manufacturer-specific trim tolerances
   - Certification class trim requirements
   - Performance vs stability trim guidelines
   - Line length adjustment protocols
   - Riser adjustment specifications
-  - APPI differential method
+  - APPI differential method (A-B, A-C per group)
   - Profile type definitions
-  - Measurement validation
+  - Measurement validation (deviation, differential, correction loop suggestion)
   - Correction history
   - Airworthiness criteria
 
@@ -184,16 +184,20 @@ This is a focused, minimal Phase One implementation designed to be extended in f
   - Technician name (with signature validation)
   - Serial number / customer reference
   - Current glider inspection information
+  - **Aspect ratio (A.R.) and group structure for trim validation**
+  - **Input both manufacturer spec and measured values for each group**
 - Implement safety checkpoints:
   - Pre-inspection validation against APPI standards
   - Critical measurement verification with pass/fail states
   - Risk assessment matrix with explicit thresholds
   - Technician confidence scoring (1-5 scale)
+  - **APPI checklist integration (see real-world example)**
 - Adaptive support features:
   - Context-specific decision trees based on glider model
   - Experience-level appropriate guidance with APPI methodology
   - Workshop pattern recognition with validation history
   - Collaborative decision support with technician signatures
+  - **Correction loop suggestion and tracking**
 
 ### C. Condition Logging - Initial Diagnosis
 
@@ -208,6 +212,7 @@ This is a focused, minimal Phase One implementation designed to be extended in f
   - Manufacturer-specific rules with safety thresholds
   - Measurement protocol compliance with APPI standards
   - Safety validation history with version tracking
+  - **Trim validation: aspect-ratio-based, group differentials, correction loop suggestion**
 - Measurement system:
   - APPI measurement protocols with validation rules
   - Real-time validation against manufacturer specs
@@ -424,6 +429,10 @@ This PRD is live and modular. Updates will be versioned alongside implementation
 - **Critical Points**: Key safety checkpoints requiring explicit validation
 - **Airworthiness**: Overall assessment of glider safety for flight
 - **Service Bulletin**: Manufacturer-issued safety or maintenance notice
+
+### New Terms
+- **APPI Differential Method**: Validation method comparing A–B and A–C for each group, with aspect-ratio-based tolerance (e.g. ±10mm for A.R. 6.44). Correction loops are suggested if out of tolerance.
+- **Correction Loop**: A loop added to a line to adjust its length, typically correcting by ~10mm per loop.
 
 ## Security Considerations
 

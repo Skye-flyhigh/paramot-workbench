@@ -20,6 +20,12 @@ alwaysApply: false
 
 Tables used to store static or semi-static data from glider manufacturers. May be scraped, manually entered, or imported.
 
+### Glider data variable:
+- Number of raisers is variable from 2 to 4 (potentially more but uncommon).
+- Number of line group: from 2 to 4 maybe more on older gliders.
+- Uncommon: lineset map different for a given model from a size to another.
+- Lines diametre: changes with glider size- heavier pilots needs thicker lines.
+
 ### `GliderModel`
 - `id`
 - `modelName`
