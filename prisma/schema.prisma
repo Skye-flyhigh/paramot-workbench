@@ -62,8 +62,104 @@ model Technician {
   @@index([certification])
 }
 
-// Indexes for performance
-index ValidationRule_type_idx on ValidationRule(type)
-index Validation_gliderModel_idx on Validation(gliderModel)
-index ManufacturerData_brand_model_idx on ManufacturerData(brand, model)
-index Technician_certification_idx on Technician(certification)
+// Prisma schema for paraMOT Workbench
+// Supports both physical line measurements and group-based trim analysis
+
+model GliderManufacturer {
+  id          Int
+  brand       string
+  model       GliderModel[]
+  inspectionSessions InspectionSession[]
+}
+
+model GliderModel {
+  id           Int          @id @default(autoincrement())
+  brand        String
+  modelName    String
+  notes        String?
+  sizes        GliderSize[]
+  lineSets     LineSet[]
+  inspectionSessions InspectionSession[]
+}
+
+model GliderSize {
+  id           Int          @id @default(autoincrement())
+  sizeLabel    String
+  minWeight    Int
+  maxWeight    Int
+  wingArea     Float?
+  aspectRatio  Float?
+  gliderModel  GliderModel  @relation(fields: [gliderModelId], references: [id])
+  gliderModelId Int
+  lineSets     LineSet[]
+  inspectionSessions InspectionSession[]
+  sizeLineLengths SizeLineLengths[]
+}
+
+model LineSet {
+  id           Int          @id @default(autoincrement())
+  name         String
+  gliderModel  GliderModel  @relation(fields: [gliderModelId], references: [id])
+  gliderModelId Int
+  gliderSize   GliderSize   @relation(fields: [gliderSizeId], references: [id])
+  gliderSizeId Int
+  physicalLines PhysicalLine[]
+  groupMappings GroupMapping[]
+}
+
+model PhysicalLine {
+  id           Int          @id @default(autoincrement())
+  lineLabel    String       // e.g. A7, B3
+  position     Int          // 1-13, etc.
+  lineSet      LineSet      @relation(fields: [lineSetId], references: [id])
+  lineSetId    Int
+  groupMappings GroupMapping[]
+  measurements LineMeasurement[]
+}
+
+model GroupMapping {
+  id           Int          @id @default(autoincrement())
+  lineSet      LineSet      @relation(fields: [lineSetId], references: [id])
+  lineSetId    Int
+  physicalLine PhysicalLine @relation(fields: [physicalLineId], references: [id])
+  physicalLineId Int
+  groupLabel   String       // e.g. G1A, G2B, STA
+}
+
+model InspectionSession {
+  id           Int          @id @default(autoincrement())
+  gliderModel  GliderModel  @relation(fields: [gliderModelId], references: [id])
+  gliderModelId Int
+  gliderSize   GliderSize   @relation(fields: [gliderSizeId], references: [id])
+  gliderSizeId Int
+  date         DateTime     @default(now())
+  technician   String
+  lineMeasurements LineMeasurement[]
+  groupAnalyses GroupAnalysis[]
+}
+
+model LineMeasurement {
+  id           Int          @id @default(autoincrement())
+  inspection   InspectionSession @relation(fields: [inspectionSessionId], references: [id])
+  inspectionSessionId Int
+  physicalLine PhysicalLine @relation(fields: [physicalLineId], references: [id])
+  physicalLineId Int
+  measuredLength Float
+}
+
+model GroupAnalysis {
+  id           Int          @id @default(autoincrement())
+  inspection   InspectionSession @relation(fields: [inspectionSessionId], references: [id])
+  inspectionSessionId Int
+  groupLabel   String       // e.g. G1A, G2B, STA
+  result       String       // pass/fail/notes
+  correction   String?      // suggested correction
+  details      String?      // JSON or text for extra info
+}
+
+model SizeLineLengths {
+  id           Int          @id @default(autoincrement())
+  gliderSize   GliderSize   @relation(fields: [gliderSizeId], references: [id])
+  gliderSizeId Int
+  lengths      Json         // { A: [...], B: [...], ... }
+}

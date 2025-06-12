@@ -1,10 +1,8 @@
-import { ValidationForm } from '@/components/validation/ValidationForm';
+import { MainLayout } from '@/components/layout/MainLayout';
 
 function App() {
   return (
-    <div className="min-h-screen bg-background p-4">
-      <ValidationForm />
-    </div>
+    <MainLayout />
   );
 }
 

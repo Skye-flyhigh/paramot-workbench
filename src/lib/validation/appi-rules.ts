@@ -9,15 +9,16 @@ function getAppiDeviationLimit(aspectRatio: number): number {
 }
 
 // Helper: Suggest correction loops (simple logic: 1 loop ≈ 10mm)
-function suggestCorrectionLoops(deviation: number): number {
-  return Math.round(deviation / 10);
+function suggestCorrectionLoops(diff: number): number {
+  // 1 loop ≈ 10mm, always round up, never negative
+  return Math.max(0, Math.round(diff / 10));
 }
 
 // APPI Trim Validation Rule (per group)
 export const appiTrimRule: APPIValidationRule = {
   id: 'APPI_TRIM',
   name: 'APPI Trim Check',
-  description: 'Validates trim using APPI methodology (aspect-ratio-based, group differentials, correction loops)',
+  description: 'Validates trim using APPI methodology (aspect-ratio-based, group differentials, correction loops, dynamic reference line)',
   category: 'safety',
   severity: 'critical',
   appiReference: 'APPI-TRIM-001',
@@ -27,47 +28,58 @@ export const appiTrimRule: APPIValidationRule = {
     const context = data as {
       aspectRatio: number;
       groups: Array<{
-        name: string; // e.g. G1, G2, G3, ST
-        measured: { A: number; B: number; C: number };
-        manufacturer: { A: number; B: number; C: number };
+        name: string;
+        measured: Record<string, number>; // e.g. { A: 7295, B: 7265, C: 7265 }
+        manufacturer: Record<string, number>;
       }>;
     };
     const { aspectRatio, groups } = context;
     const limit = getAppiDeviationLimit(aspectRatio);
     let hasError = false;
     const results: string[] = [];
-    const corrections: Record<string, { AB: number; AC: number; loopsA: number; loopsB: number; loopsC: number }> = {};
+    const corrections: Record<string, Record<string, number>> = {};
+    const differentials: Record<string, Record<string, number>> = {};
 
     for (const group of groups) {
-      // Calculate deviation for each line
-      const devA = group.measured.A - group.manufacturer.A;
-      const devB = group.measured.B - group.manufacturer.B;
-      const devC = group.measured.C - group.manufacturer.C;
-      // Calculate differentials
-      const diffAB = devA - devB;
-      const diffAC = devA - devC;
-      // Correction suggestion (bring B/C to A)
-      const loopsA = 0;
-      const loopsB = suggestCorrectionLoops(diffAB);
-      const loopsC = suggestCorrectionLoops(diffAC);
-      corrections[group.name] = { AB: diffAB, AC: diffAC, loopsA, loopsB, loopsC };
-      // Validation
-      if (Math.abs(diffAB) > limit || Math.abs(diffAC) > limit) {
-        hasError = true;
-        results.push(
-          `${group.name}: Differential out of tolerance (A-B: ${diffAB}mm, A-C: ${diffAC}mm, limit: ±${limit}mm)`
-        );
-      } else {
-        results.push(
-          `${group.name}: Differential OK (A-B: ${diffAB}mm, A-C: ${diffAC}mm, limit: ±${limit}mm)`
-        );
+      // Find the shortest line (reference)
+      const lineNames = Object.keys(group.measured);
+      const measuredEntries = Object.entries(group.measured);
+      const referenceEntry = measuredEntries.reduce((min, curr) => (curr[1] < min[1] ? curr : min));
+      const referenceLine = referenceEntry[0];
+      const referenceValue = referenceEntry[1];
+
+      // Correction: for each line, how much to shorten to match reference
+      corrections[group.name] = {};
+      for (const [line, value] of measuredEntries) {
+        if (line === referenceLine) {
+          corrections[group.name][line] = 0;
+        } else {
+          const diff = value - referenceValue;
+          corrections[group.name][line] = suggestCorrectionLoops(diff);
+        }
+      }
+
+      // Differential table: for all pairs (e.g. AB, AC, AD, etc.)
+      differentials[group.name] = {};
+      for (let i = 0; i < lineNames.length; i++) {
+        for (let j = i + 1; j < lineNames.length; j++) {
+          const diffKey = `${lineNames[i]}${lineNames[j]}`;
+          const diffVal = group.measured[lineNames[i]] - group.measured[lineNames[j]];
+          differentials[group.name][diffKey] = diffVal;
+          if (Math.abs(diffVal) > limit) {
+            hasError = true;
+            results.push(
+              `${group.name}: Differential ${diffKey} (${diffVal}mm) out of tolerance (±${limit}mm)`
+            );
+          }
+        }
       }
     }
 
     return {
       status: hasError ? 'fail' : 'pass',
-      message: results.join('\n'),
-      details: { corrections },
+      message: results.length > 0 ? results.join('\n') : 'All group differentials within tolerance.',
+      details: { corrections, differentials },
       timestamp: new Date(),
     };
   },
